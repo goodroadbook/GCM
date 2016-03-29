@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.gcm">
+
+    <!-- GCM을 수신하기 퍼미션이다.-->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- GCM이 수신되었을 때 화면을 깨우기 위한 퍼미션이다..-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+        </receiver>
+
+        <!-- TokenIntentService 클래스는 GCM Connection Server에서 토큰을 발급 받기
+        위해 만들어진 클래스이다. -->
+        <service android:name="com.example.gcm.TokenIntentService"
+            android:exported="false">
+        </service>
+
+        <!-- ExGcmListenerService 클래스는 GCM 메시지를 수신하여 사용자에게 팝업이나
+        Notification bar를 이용하여 화면에 표시 하기 위해 만들어진 클래스이다.-->
+        <service android:name="com.example.gcm.ExGcmListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <!-- ExIIDListenerService 클래스는 Token이 6개월 주기로 갱신을 하기 위해
+        만들어진 클래스이다.-->
+        <service android:name="com.example.gcm.ExIIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".PushMsgSelectActivity">
+        </activity>
+    </application>
+
+</manifest>
