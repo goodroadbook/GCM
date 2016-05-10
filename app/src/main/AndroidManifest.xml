@@ -55,8 +55,6 @@ package="com.example.gcm">
             </intent-filter>
         </service>
 
-        <activity android:name=".PushMsgSelectActivity">
-        </activity>
     </application>
 
 </manifest>

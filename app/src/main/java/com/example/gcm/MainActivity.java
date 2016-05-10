@@ -24,9 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 버튼을 제공하여 사용자가 클릭하면 GCM 등록을 하도록 한다.
         Button btnGCMRemove = (Button) findViewById(R.id.btnremove);
         btnGCMRemove.setOnClickListener(this);
-
-        Button btnSelect = (Button) findViewById(R.id.btnselect);
-        btnSelect.setOnClickListener(this);
     }
 
     @Override
@@ -61,10 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, TokenIntentService.class);
                 intent.putExtra(TokenIntentService.COMMAND, TokenIntentService.CMD_DEL);
                 startService(intent);
-                break;
-            case R.id.btnselect:
-                intent = new Intent(this, PushMsgSelectActivity.class);
-                startActivity(intent);
                 break;
             default:
                 break;
