@@ -9,9 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import com.example.gcm.db.DBManager;
-import com.example.gcm.db.DBSqlData;
-import com.example.gcm.db.PushMsgData;
 import com.google.android.gms.gcm.GcmListenerService;
 
 /**
@@ -23,13 +20,6 @@ public class ExGcmListenerService extends GcmListenerService
     public void onMessageReceived(String from, Bundle data)
     {
         String message = data.getString("message");
-
-        PushMsgData pData = new PushMsgData(message);
-
-        DBManager dbMgr = new DBManager(this);
-        dbMgr.dbOpen();
-        dbMgr.insertData(DBSqlData.SQL_DB_INSERT_DATA, pData);
-        dbMgr.dbClose();
 
         sendNotification(message);
     }
